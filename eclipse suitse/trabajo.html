@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Organigrama con Manuales</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body.galaxia {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(ellipse at bottom, #0d1b2a 0%, #000014 80%), #000000;
+      color: #ffffff;
+      margin: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body.galaxia::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        radial-gradient(2px 2px at 20% 30%, #ffffffcc, transparent),
+        radial-gradient(1.5px 1.5px at 40% 60%, #ffffffaa, transparent),
+        radial-gradient(2.5px 2.5px at 70% 80%, #ffffffdd, transparent),
+        radial-gradient(1px 1px at 90% 15%, #ffffffbb, transparent),
+        radial-gradient(1.2px 1.2px at 10% 85%, #ffffffcc, transparent);
+      background-repeat: repeat;
+      background-size: 100% 100%;
+      z-index: -2;
+      animation: starTwinkle 15s ease-in-out infinite alternate;
+    }
+
+    @keyframes starTwinkle {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+
+    h1 {
+      color: #ffffff;
+      margin-bottom: 10px;
+      user-select: none;
+    }
+
+    header nav a {
+      color: #ffffff;
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: bold;
+    }
+
+    header nav a:hover {
+      text-decoration: underline;
+    }
+
+    #manualContainer {
+      width: 90%;
+      max-width: 900px;
+      height: 400px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+      border-radius: 12px;
+      margin-bottom: 25px;
+      padding: 10px 15px;
+      overflow-y: auto;
+      position: relative;
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    #manualContainer iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 8px;
+    }
+
+    #manualContainer .closeBtn {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      background: #e74c3c;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.9em;
+      transition: transform 0.2s ease;
+    }
+
+    #manualContainer .closeBtn:hover {
+      transform: scale(1.1);
+    }
+
+    .organigrama {
+      max-width: 960px;
+      width: 100%;
+    }
+
+    .nodo {
+      background: #2e66c3;
+      color: #ffffff;
+      padding: 10px 18px;
+      border-radius: 10px;
+      box-shadow: 0 3px 7px rgba(46, 102, 195, 0.4);
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      min-width: 140px;
+      margin: 5px;
+      transition: all 0.3s ease;
+      user-select: none;
+      position: relative;
+      animation: floaty 4s ease-in-out infinite;
+    }
+
+    .nodo:hover {
+      background: #2250a0;
+      transform: translateY(-5px) scale(1.03);
+    }
+
+    .nivel {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px 40px;
+      margin-top: 25px;
+      position: relative;
+    }
+
+    .nivel:not(:first-child)::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      border-top: 2px solid #2e66c3;
+      z-index: 0;
+    }
+
+    .nodo::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      width: 2px;
+      height: 20px;
+      background: #2e66c3;
+      transform: translateX(-50%);
+      z-index: 1;
+    }
+
+    .nivel:last-child .nodo::after {
+      display: none;
+    }
+
+    .subnivel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+     .nivel-1 .nodo {
+      background: #007F5F;  /* Verde oscuro */
+      color: #ffffff;
+      font-size: 1.1em;
+    }
+
+    .nivel-2 .nodo {
+      background: #2B9348;  /* Verde medio */
+      color: #ffffff;
+      font-size: 1em;
+    }
+
+    .nivel-3 .nodo {
+      background: #55A630;  /* Verde lima */
+      color: #000000;
+      font-size: 0.95em;
+    }
+
+    .nivel-4 .nodo {
+      background: #80ED99;  /* Verde agua suave / menta */
+      color: #000000;
+      font-size: 0.9em;
+    }
+
+
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 900px) {
+      .nivel {
+        flex-direction: column;
+        gap: 20px;
+      }
+      .nivel:not(:first-child)::before,
+      .nodo::after {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body class="galaxia">
+
+  <header>
+    <h1>Te estamos buscando!!!</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="habitaciones.html">Habitaciones</a>
+      <a href="trabajo.html">Trabaja con nosotros</a>
+      <a href="quienes.html">¿Quiénes somos?</a>
+    </nav>
+  </header>
+
+  <h1>TU ROL , TU IMPACTO , TU EQUIPO</h1>
+  <div style="margin: 20px;">
+  <button id="btnEncuentra" class="boton-saltarin">
+    Encuentra el trabajo indicado para ti
+  </button>
+</div>
+<div id="formularioContainer" style="display: none; margin: 20px; background: rgba(255,255,255,0.08); backdrop-filter: blur(10px); padding: 20px; border-radius: 12px; max-width: 600px;">
+  <h2>Encuentra tu puesto ideal</h2>
+  <form id="formularioTrabajo">
+    <label>¿Prefieres trabajar con comida o atención al cliente?</label><br>
+    <select id="gusto">
+      <option value="">-- Selecciona --</option>
+      <option value="comida">Con comida</option>
+      <option value="cliente">Con atención al cliente</option>
+    </select><br><br>
+
+    <label>¿Qué horario prefieres?</label><br>
+    <select id="turno">
+      <option value="">-- Selecciona --</option>
+      <option value="dia">Día</option>
+      <option value="noche">Noche</option>
+    </select><br><br>
+
+    <label>¿Qué nivel de experiencia tienes?</label><br>
+    <select id="experiencia">
+      <option value="">-- Selecciona --</option>
+      <option value="alta">Alta</option>
+      <option value="media">Media</option>
+      <option value="baja">Baja</option>
+    </select><br><br>
+
+    <button type="submit" class="boton-saltarin">Ver mi puesto</button>
+  </form>
+</div>
+
+  <div id="manualContainer">
+    <button class="closeBtn" onclick="cerrarManual()">Cerrar ×</button>
+    <iframe id="manualFrame" src=""></iframe>
+  </div>
+
+  <div class="organigrama">
+  <div class="organigrama nivel-1">
+    <div class="nodo" onclick="window.open('manual_gerente_general.html', '_blank')">Gerente General</div>
+
+    <div class="nivel nivel-2">
+      <div class="subnivel">
+        <div class="nodo" onclick="window.open('asistente-administrativo.html', '_blank')">Asistente Administrativo</div>
+      </div>
+
+      <div class="subnivel">
+        <div class="nodo" onclick="window.open('gerente-habitaciones.html', '_blank')">Gerente de Habitaciones</div>
+
+        <div class="nivel nivel-3">
+          <div class="subnivel">
+            <div class="nodo" onclick="window.open('ama-de-llaves.html', '_blank')">Ama de Llaves</div>
+
+            <div class="nivel nivel-4">
+              <div class="nodo" onclick="window.open('houseman.html', '_blank')">Houseman</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subnivel">
+        <div class="nodo" onclick="window.open('gerente-alimentos.html', '_blank')">Gerente en Alimentos</div>
+
+        <div class="nivel nivel-3" style="gap: 18px;">
+          <div class="subnivel">
+            <div class="nodo" onclick="window.open('chef.html', '_blank')">Chef</div>
+            <div class="nivel nivel-4" style="gap: 18px;">
+              <div class="nodo" onclick="window.open('cocineros.html', '_blank')">Cocineros</div>
+              <div class="nodo" onclick="window.open('lavaplatos.html', '_lblank')">Lavaplatos</div>
+            </div>
+          </div>
+
+          <div class="subnivel">
+            <div class="nodo" onclick="window.open('gerente-bares.html', '_blank')">Gerente de Bares</div>
+            <div class="nivel nivel-4">
+              <div class="nodo" onclick="window.open('bartender.html', '_blank')">Bartender</div>
+            </div>
+          </div>
+
+          <div class="subnivel">
+            <div class="nodo" onclick="window.open('capitan-camareros.html', '_blank')">Capitán de Camareros</div>
+            <div class="nivel nivel-4">
+              <div class="nodo" onclick="window.open('camarero.html', '_blank')">Camarero</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subnivel">
+        <div class="nodo" onclick="window.open('gerente-administrativo.html', '_blank')">Gerente Administrativo</div>
+        <div class="nivel nivel-3" style="gap: 15px;">
+          <div class="subnivel" style="min-width: 140px;">
+            <div class="nodo" onclick="window.open('gerente-contabilidad.html', '_blank')">Gerente de Contabilidad</div>
+            <div class="nivel nivel-4">
+              <div class="nodo" onclick="window.open('facturacion.html', '_blank')">Facturación</div>
+              <div class="nodo" onclick="window.open('costo.html', '_blank')">Costo</div>
+              <div class="nodo" onclick="window.open('auxiliar-contabilidad.html', '_blank')">Auxiliar de Contabilidad</div>
+            </div>
+          </div>
+
+          <div class="subnivel" style="min-width: 140px;">
+            <div class="nodo" onclick="window.open('gerente-compras.html', '_blank')">Gerente de Compras</div>
+            <div class="nivel nivel-4">
+              <div class="nodo" onclick="window.open('auxiliar-inventarios.html', '_blank')">Auxiliar de Inventarios</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subnivel">
+        <div class="nodo" onclick="window.open('gerente-ventas-marketing.html', '_blank')">Gerente de Ventas y Marketing</div>
+        <div class="nivel nivel-3" style="gap: 18px;">
+          <div class="nodo" onclick="window.open('gerente-reserva.html', '_blank')">Gerente de Reserva</div>
+          <div class="nodo" onclick="window.open('gerente-eventos.html', '_blank')">Gerente de Eventos</div>
+          <div class="nodo" onclick="window.open('gerente-excursiones.html', '_blank')">Gerente de Excursiones</div>
+        </div>
+      </div>
+
+      <div class="subnivel">
+        <div class="nodo" onclick="window.open('gerente-recepcion.html', '_blank')">Gerente de Recepción</div>
+        <div class="nivel nivel-3" style="gap: 18px;">
+          <div class="nodo" onclick="window.open('recepcionista.html', '_blank')">Recepcionista</div>
+          <div class="nodo" onclick="window.open('recepcionista-nocturno.html', '_blank')">Recepcionista Nocturno</div>
+          <div class="nodo" onclick="window.open('auxiliar-recepcion.html', '_blank')">Auxiliar de Recepción</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<audio autoplay loop>
+    <source src="calm-space-music-312291.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio HTML5.
+  </audio>
