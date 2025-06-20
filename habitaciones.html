@@ -1,39 +1,235 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Habitaciones - Eclipse Suitse</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Suites - Eclipse Suitse</title>
+  <style>
+    body {
+      background: #0d0d2b;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #1a1a3d;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    .habitaciones-listado {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 40px;
+    }
+
+    .habitacion {
+      text-align: center;
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
+      border-radius: 12px;
+      transform: translateY(50px);
+      opacity: 0;
+      transition: all 0.8s ease-out;
+      cursor: pointer;
+    }
+
+    .habitacion.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .habitacion img {
+      width: 100%;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .habitacion img:hover {
+      transform: scale(1.05);
+    }
+
+    footer {
+      background-color: #111;
+      color: #aaa;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* Modal Styles */
+    #modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+    }
+
+    #modalContent {
+      background: #111c44;
+      border-radius: 15px;
+      max-width: 90%;
+      max-height: 90%;
+      padding: 20px;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow-y: auto;
+    }
+
+    #modalContent img {
+      max-width: 100%;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    #modalClose {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 28px;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      user-select: none;
+    }
+
+    @media(max-width: 900px) {
+      .habitaciones-listado {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(max-width: 600px) {
+      .habitaciones-listado {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
+
 <body>
   <header>
-    <h1>Habitaciones - Eclipse Suitse</h1>
+    <h1>Suites - Eclipse Suitse</h1>
     <nav>
       <a href="index.html">Inicio</a>
-      <a href="habitaciones.html">Habitaciones</a>
+      <a href="habitaciones.html">Suites</a>
       <a href="trabajo.html">Trabaja con nosotros</a>
       <a href="quienes.html">¿Quiénes somos?</a>
     </nav>
   </header>
 
   <section class="habitaciones-listado">
-    <div class="habitacion">
-      <img class="zoom-hover" src="hab1.png" alt="Habitación 1">
-      <p>Habitación Lunar - $120/noche</p>
+    <div class="habitacion" data-nombre="Suite Estrella Polaris" data-precio="$250/noche" data-img="suit1.png">
+      <img src="suit1.png" alt="Suite Estrella Polaris" />
+      <p>Suite Estrella Polaris - $250/noche</p>
     </div>
-    <div class="habitacion">
-      <img class="zoom-hover" src="hab2.png" alt="Habitación 2">
-      <p>Habitación Nebulosa - $150/noche</p>
+
+    <div class="habitacion" data-nombre="Suite Nebulosa Andrómeda" data-precio="$230/noche" data-img="suit2.png">
+      <img src="suit2.png" alt="Suite Nebulosa Andrómeda" />
+      <p>Suite Nebulosa Andrómeda - $230/noche</p>
     </div>
-    <div class="habitacion">
-      <img class="zoom-hover" src="hab3.png" alt="Habitación 3">
-      <p>Habitación Galáctica - $200/noche</p>
+
+    <div class="habitacion" data-nombre="Suite Vía Láctea" data-precio="$280/noche" data-img="suit3.png">
+      <img src="suit3.png" alt="Suite Vía Láctea" />
+      <p>Suite Vía Láctea - $280/noche</p>
+    </div>
+
+    <div class="habitacion" data-nombre="Suite Eclipse Deluxe" data-precio="$300/noche" data-img="suit4.png">
+      <img src="suit4.png" alt="Suite Eclipse Deluxe" />
+      <p>Suite Eclipse Deluxe - $300/noche</p>
+    </div>
+
+    <div class="habitacion" data-nombre="Suite Aurora Boreal" data-precio="$270/noche" data-img="suit5.png">
+      <img src="suit5.png" alt="Suite Aurora Boreal" />
+      <p>Suite Aurora Boreal - $270/noche</p>
+    </div>
+
+    <div class="habitacion" data-nombre="Suite Cometa Halley" data-precio="$260/noche" data-img="suit6.png">
+      <img src="suit6.png" alt="Suite Cometa Halley" />
+      <p>Suite Cometa Halley - $260/noche</p>
+    </div>
+
+    <div class="habitacion" data-nombre="Suite Galaxia Espiral" data-precio="$290/noche" data-img="suit7.png">
+      <img src="suit7.png" alt="Suite Galaxia Espiral" />
+      <p>Suite Galaxia Espiral - $290/noche</p>
+    </div>
+
+    <div class="habitacion" data-nombre="Suite Planeta Tierra" data-precio="$240/noche" data-img="suit8.png">
+      <img src="suit8.png" alt="Suite Planeta Tierra" />
+      <p>Suite Planeta Tierra - $240/noche</p>
+    </div>
+
+    <div class="habitacion" data-nombre="Suite Constelación Orión" data-precio="$310/noche" data-img="suit9.png">
+      <img src="suit9.png" alt="Suite Constelación Orión" />
+      <p>Suite Constelación Orión - $310/noche</p>
     </div>
   </section>
 
   <footer>
     <p>Ubicados en el corazón de Marte, ¡con vista a las lunas marcianas!</p>
   </footer>
+
+  <!-- Modal -->
+  <div id="modal">
+    <div id="modalContent">
+      <span id="modalClose">&times;</span>
+      <img id="modalImg" src="" alt="Habitación ampliada" />
+      <h2 id="modalNombre"></h2>
+      <p id="modalPrecio"></p>
+    </div>
+  </div>
+
+  <script>
+    // Animación al hacer scroll
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.habitacion').forEach(hab => {
+      observer.observe(hab);
+
+      // Evento click para abrir modal
+      hab.addEventListener('click', () => {
+        const nombre = hab.getAttribute('data-nombre');
+        const precio = hab.getAttribute('data-precio');
+        const imgSrc = hab.getAttribute('data-img');
+
+        document.getElementById('modalNombre').textContent = nombre;
+        document.getElementById('modalPrecio').textContent = precio;
+        document.getElementById('modalImg').src = imgSrc;
+        document.getElementById('modalImg').alt = nombre;
+
+        document.getElementById('modal').style.display = 'flex';
+      });
+    });
+
+    // Cerrar modal
+    document.getElementById('modalClose').addEventListener('click', () => {
+      document.getElementById('modal').style.display = 'none';
+    });
+
+    // Cerrar modal al hacer click fuera del contenido
+    document.getElementById('modal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('modal')) {
+        document.getElementById('modal').style.display = 'none';
+      }
+    });
+  </script>
 </body>
 </html>
