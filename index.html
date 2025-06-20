@@ -5,8 +5,84 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Eclipse Suitse - Inicio</title>
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Modal de bienvenida */
+    #modalAnuncio {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      font-family: Arial, sans-serif;
+      border: 8px solid red;
+      box-sizing: border-box;
+    }
+
+    #modalAnuncio div {
+      text-align: center;
+      max-width: 700px;
+      padding: 40px 30px;
+      animation: aparecer 0.8s ease-out;
+    }
+
+    #modalAnuncio img {
+      width: 160px;
+      height: 160px;
+      margin-bottom: 30px;
+    }
+
+    #modalAnuncio h2, #modalAnuncio h3, #modalAnuncio h1, #modalAnuncio p {
+      margin: 10px 0;
+    }
+
+    #modalAnuncio button {
+      margin-top: 30px;
+      padding: 12px 30px;
+      background-color: red;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: scale(0.85);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  </style>
 </head>
 <body>
+  <!-- MODAL DE BIENVENIDA -->
+  <div id="modalAnuncio">
+    <div>
+      <h2>UNIVERSIDAD MAYOR DE SAN ANDRÉS</h2>
+      <h3>CARRERA ADMINISTRACIÓN DE EMPRESAS</h3>
+      <img src="logo.png" alt="Logo">
+      <h1>MANUAL DE FUNCIONES</h1>
+      <div style="text-align: left; font-size: 16px; line-height: 1.6; max-width: 500px; margin: 0 auto; color: #ffffff;">
+        <p><strong>INTEGRANTES:</strong><br> CACERES SIACARA KEVIN SILVESTRE<br> MAMANI CRUZ EDGAR</p>
+        <p><strong>DOCENTE:</strong> LIC. JORGE VALDA</p>
+        <p><strong>FECHA:</strong> Viernes 20 de junio de 2025</p>
+        <p><strong>GESTIÓN:</strong> 1-2025</p>
+      </div>
+      <button onclick="cerrarModal()">¡Empecemos!</button>
+    </div>
+  </div>
+
   <header>
     <h1>Hotel Eclipse Suitse</h1>
     <nav>
@@ -41,7 +117,7 @@
       <img class="zoom-hover" src="hab1.png" alt="Habitación 1">
       <img class="zoom-hover" src="hab2.png" alt="Habitación 2">
       <img class="zoom-hover" src="hab3.png" alt="Habitación 3">
-     </div>
+    </div>
   </section>
 
   <footer>
@@ -51,201 +127,11 @@
       <img src="assets/icons/logo3.png" alt="Instagram" style="width:32px; margin: 0 5px;">
     </div>
   </footer>
- <!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Suites - Eclipse Suitse</title>
-  <style>
-    body {
-      background: #0d0d2b;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-
-    header {
-      background-color: #1a1a3d;
-      padding: 20px;
-      text-align: center;
-    }
-
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      margin: 0 10px;
-    }
-
-    .habitaciones-listado {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      padding: 40px;
-    }
-
-    .habitacion {
-      text-align: center;
-      background: rgba(255,255,255,0.05);
-      padding: 20px;
-      border-radius: 12px;
-      transform: translateY(50px);
-      opacity: 0;
-      transition: all 0.8s ease-out;
-      cursor: pointer;
-    }
-
-    .habitacion.visible {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    .habitacion img {
-      width: 100%;
-      border-radius: 10px;
-      transition: transform 0.3s ease;
-    }
-
-    .habitacion img:hover {
-      transform: scale(1.05);
-    }
-
-    footer {
-      background-color: #111;
-      color: #aaa;
-      text-align: center;
-      padding: 20px;
-    }
-
-    /* Modal Styles */
-    #modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.85);
-      justify-content: center;
-      align-items: center;
-    }
-
-    #modalContent {
-      background: #111c44;
-      border-radius: 15px;
-      max-width: 90%;
-      max-height: 90%;
-      padding: 20px;
-      text-align: center;
-      color: white;
-      position: relative;
-      overflow-y: auto;
-    }
-
-    #modalContent img {
-      max-width: 100%;
-      border-radius: 12px;
-      margin-bottom: 20px;
-    }
-
-    #modalClose {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 28px;
-      color: white;
-      cursor: pointer;
-      font-weight: bold;
-      user-select: none;
-    }
-
-    @media(max-width: 900px) {
-      .habitaciones-listado {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media(max-width: 600px) {
-      .habitaciones-listado {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <header>
-    <h1>Suites - Eclipse Suitse</h1>
-    <nav>
-      <a href="index.html">Inicio</a>
-      <a href="habitaciones.html">Suites</a>
-      <a href="trabajo.html">Trabaja con nosotros</a>
-      <a href="quienes.html">¿Quiénes somos?</a>
-    </nav>
-  </header>
-
-
-  <footer>
-    <p>Ubicados en el corazón de Marte, ¡con vista a las lunas marcianas!</p>
-  </footer>
-
-  <!-- Modal -->
-  <div id="modal">
-    <div id="modalContent">
-      <span id="modalClose">&times;</span>
-      <img id="modalImg" src="" alt="Habitación ampliada" />
-      <h2 id="modalNombre"></h2>
-      <p id="modalPrecio"></p>
-    </div>
-  </div>
 
   <script>
-    // Animación al hacer scroll
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.habitacion').forEach(hab => {
-      observer.observe(hab);
-
-      // Evento click para abrir modal
-      hab.addEventListener('click', () => {
-        const nombre = hab.getAttribute('data-nombre');
-        const precio = hab.getAttribute('data-precio');
-        const imgSrc = hab.getAttribute('data-img');
-
-        document.getElementById('modalNombre').textContent = nombre;
-        document.getElementById('modalPrecio').textContent = precio;
-        document.getElementById('modalImg').src = imgSrc;
-        document.getElementById('modalImg').alt = nombre;
-
-        document.getElementById('modal').style.display = 'flex';
-      });
-    });
-
-    // Cerrar modal
-    document.getElementById('modalClose').addEventListener('click', () => {
-      document.getElementById('modal').style.display = 'none';
-    });
-
-    // Cerrar modal al hacer click fuera del contenido
-    document.getElementById('modal').addEventListener('click', (e) => {
-      if (e.target === document.getElementById('modal')) {
-        document.getElementById('modal').style.display = 'none';
-      }
-    });
+    function cerrarModal() {
+      document.getElementById("modalAnuncio").style.display = "none";
+    }
   </script>
-  <script>
-  function cerrarModal() {
-    document.getElementById("modalAnuncio").style.display = "none";
-  }
-</script>
-
-</body>
-</html>
- 
 </body>
 </html>
