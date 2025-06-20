@@ -1,0 +1,68 @@
+#modalAnuncio {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  box-sizing: border-box;
+  z-index: 9999;
+  overflow-y: auto; /* Habilita scroll vertical */
+}
+
+#modalAnuncio > div {
+  max-width: 500px;
+  width: 100%;
+  background-color: #fff;
+  padding: 30px 25px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  animation: aparecer 0.8s ease-out;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+#modalAnuncio img {
+  width: 200px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+#modalAnuncio h1 {
+  font-size: 22px;
+  margin: 10px 0;
+}
+
+#modalAnuncio h2, #modalAnuncio h3, #modalAnuncio p {
+  margin: 10px 0;
+}
+
+#modalAnuncio button {
+  margin-top: 15px;
+  padding: 10px 25px;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+#modalAnuncio button:hover {
+  background-color: darkred;
+  transform: scale(1.05);
+}
+
+#modalAnuncio button:active {
+  transform: scale(0.98);
+}
