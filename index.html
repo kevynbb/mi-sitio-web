@@ -1,114 +1,103 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Eclipse Suitse - Inicio</title>
-  <link rel="stylesheet" href="css/style.css">
- <style>
-  #modalAnuncio {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    color: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px; /* margen interno del contenedor total */
-    box-sizing: border-box;
-    z-index: 9999;
-  }
-
-  #modalAnuncio div {
-    text-align: center;
-    max-width: 500px;
-    width: 100%;
-    background-color: #fff;
-    padding: 30px 25px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
-    animation: aparecer 0.8s ease-out;
-  }
-
-  #modalAnuncio img {
-    width: 200px;
-    height: auto;
-    margin-bottom: 20px;
-  }
-
-  #modalAnuncio h1 {
-    font-size: 22px;
-    margin: 10px 0;
-  }
-
-  #modalAnuncio h2, #modalAnuncio h3, #modalAnuncio p {
-    margin: 10px 0;
-  }
-
-  #modalAnuncio button {
-    margin-top: 20px;
-    padding: 10px 25px;
-    background-color: red;
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 15px;
-  }
-
-  @keyframes aparecer {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
-  }
-</style>
-
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* Estilos para el modal */
+    #modalAnuncio {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: white;
+      color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      box-sizing: border-box;
+      z-index: 9999;
+      overflow-y: auto; /* Scroll vertical si es necesario */
+    }
+    #modalAnuncio > div {
+      text-align: center;
+      max-width: 500px;
+      width: 100%;
+      background-color: #fff;
+      padding: 30px 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      animation: aparecer 0.8s ease-out;
+    }
+    @keyframes aparecer {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    #modalAnuncio img {
+      width: 200px;
+      height: auto;
+      margin-bottom: 20px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #modalAnuncio h1 {
+      font-size: 22px;
+      margin: 10px 0;
+    }
+    #modalAnuncio h2, #modalAnuncio h3, #modalAnuncio p {
+      margin: 10px 0;
+    }
+    #modalAnuncio button {
+      margin-top: 20px;
+      padding: 10px 25px;
+      background-color: red;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      transition: all 0.3s ease;
+    }
+    #modalAnuncio button:hover {
+      background-color: darkred;
+      transform: scale(1.05);
+    }
+    #modalAnuncio button:active {
+      transform: scale(0.98);
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ANUNCIO MODAL -->
+  <!-- MODAL al inicio del body -->
   <div id="modalAnuncio">
     <div>
       <h2>UNIVERSIDAD MAYOR DE SAN ANDRÉS</h2>
       <h3>CARRERA ADMINISTRACIÓN DE EMPRESAS</h3>
-     <img src="logo-umsa.png" alt="Logo UMSA" style="display: block; margin: 0 auto 15px auto;">
-
-<button 
-  onclick="cerrarModal()" 
-  style="
-    display: block; 
-    margin: 0 auto 25px auto; 
-    padding: 10px 25px; 
-    background-color: red; 
-    color: white; 
-    font-weight: bold; 
-    border: none; 
-    border-radius: 8px; 
-    cursor: pointer; 
-    font-size: 15px;
-  ">
-  Empezar
-</button>
-
-<h1>MANUAL DE FUNCIONES</h1>
-
-<div style="text-align: left; font-size: 15px; line-height: 1.6; max-width: 100%; margin: 0 auto;">
-  <p><strong>INTEGRANTES:</strong></p>
-  <ul style="text-align: left; padding-left: 20px; margin-top: 5px;">
-    <li>CACERES SIACARA KEVIN SILVESTRE</li>
-    <li>MAMANI CRUZ EDGAR</li>
-  </ul>
-  <p><strong>DOCENTE:</strong> LIC. JORGE VALDA</p>
-  <p><strong>FECHA:</strong> Viernes 20 de junio de 2025</p>
-  <p><strong>GESTIÓN:</strong> 1-2025</p>
-</div>
-
-
+      <img src="logo-umsa.png" alt="Logo UMSA" />
+      <button onclick="cerrarModal()">Empezar</button>
+      <h1>MANUAL DE FUNCIONES</h1>
+      <div style="text-align: left; font-size: 15px; line-height: 1.6; max-width: 100%; margin: 0 auto;">
+        <p><strong>INTEGRANTES:</strong></p>
+        <ul style="text-align: left; padding-left: 20px; margin-top: 5px;">
+          <li>CACERES SIACARA KEVIN SILVESTRE</li>
+          <li>MAMANI CRUZ EDGAR</li>
+        </ul>
+        <p><strong>DOCENTE:</strong> LIC. JORGE VALDA</p>
+        <p><strong>FECHA:</strong> Viernes 20 de junio de 2025</p>
+        <p><strong>GESTIÓN:</strong> 1-2025</p>
+      </div>
     </div>
   </div>
+
+  <!-- Tu contenido original debajo -->
 
   <header>
     <h1>Hotel Eclipse Suitse</h1>
@@ -135,29 +124,29 @@
   </section>
 
   <section class="comedor">
-    <img class="zoom-hover largo" src="comedor.png" alt="Comedor principal del hotel">
+    <img class="zoom-hover largo" src="comedor.png" alt="Comedor principal del hotel" />
   </section>
 
   <section class="habitaciones">
     <h2>Habitaciones Temáticas</h2>
     <div class="galeria">
-      <img class="zoom-hover" src="hab1.png" alt="Habitación 1">
-      <img class="zoom-hover" src="hab2.png" alt="Habitación 2">
-      <img class="zoom-hover" src="hab3.png" alt="Habitación 3">
+      <img class="zoom-hover" src="hab1.png" alt="Habitación 1" />
+      <img class="zoom-hover" src="hab2.png" alt="Habitación 2" />
+      <img class="zoom-hover" src="hab3.png" alt="Habitación 3" />
     </div>
   </section>
 
   <footer>
     <div class="redes-sociales">
-      <img src="logo.png" alt="WhatsApp" style="width:32px; margin: 0 5px;">
-      <img src="logo2.png" alt="Facebook" style="width:32px; margin: 0 5px;">
-      <img src="logo3.png" alt="Instagram" style="width:32px; margin: 0 5px;">
+      <img src="logo.png" alt="WhatsApp" style="width:32px; margin: 0 5px;" />
+      <img src="logo2.png" alt="Facebook" style="width:32px; margin: 0 5px;" />
+      <img src="logo3.png" alt="Instagram" style="width:32px; margin: 0 5px;" />
     </div>
   </footer>
 
   <script>
     function cerrarModal() {
-      document.getElementById("modalAnuncio").style.display = "none";
+      document.getElementById('modalAnuncio').style.display = 'none';
     }
   </script>
 </body>
